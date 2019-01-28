@@ -1,0 +1,140 @@
+﻿@model OrchestraManagement.DbFirstData.Orchestra
+
+@{
+    ViewData["Title"] = "Details For Orchestra: " + Model.Name;
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressLine1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AddressLine1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressLine2)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AddressLine2)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ZipCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.WebsiteUrl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.WebsiteUrl)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Create" asp-controller="Musician" asp-route-id="@Model.Id">Make Musician</a> |
+    <a asp-action="Edit" asp-controller="Orchestra" asp-route-id="@Model.Id">Edit Orchestra</a> |
+    <a asp-action="Index">Back to Manage Orchestra</a>
+</div>
+@{
+    var text = Model.Name + " has " + Model.Musician.Count;
+
+    if (Model.Musician.Count == 1)
+    {
+        text += " Musician";
+
+    }
+    else
+    {
+
+        text += " Musicians";
+
+    };
+}
+<hr>
+<div>
+    <h3>
+        @text
+    </h3>
+</div>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                First Name
+            </th>
+            <th>
+                Last Name
+            </th>
+            <th>
+                Section
+            </th>
+            <th>
+                Section Leader
+            </th>
+            <th>
+                Instrument Count
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Musician)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Section)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SectionLeader)
+                </td>
+                <td>
+                    @item.Instrument.Count
+                </td>
+                <td>
+                    <a asp-action="Details" asp-controller="Musician" asp-route-id="@item.Id">Musician Details</a> |
+                    <a asp-action="Edit" asp-controller="Musician" asp-route-id="@item.Id">Edit Musician</a> |
+                    <a asp-action="Delete" asp-controller="Musician" asp-route-id="@item.Id">Delete Musician</a> 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

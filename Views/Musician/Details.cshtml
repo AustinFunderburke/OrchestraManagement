@@ -1,0 +1,121 @@
+﻿@model OrchestraManagement.DbFirstData.Musician
+
+@{
+    ViewData["Title"] = "Details For Musician: " + Model.FirstName + " " + Model.LastName;
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Section)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Section)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SectionLeader)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SectionLeader)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrchestraId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrchestraId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-controller="Musician" asp-route-id="@Model.Id">Edit Musician</a> |
+    <a asp-action="Create" asp-controller="Instrument" asp-route-id="@Model.Id">Make Instrument</a> |
+    <a asp-action="Details" asp-controller="Orchestra" asp-route-id="@Model.OrchestraId">Back to Orchestra Details</a>
+</div>
+@{
+    var text = Model.FirstName + " " + Model.LastName + " has " + Model.Instrument.Count;
+
+    if (Model.Instrument.Count == 1)
+    {
+        text += " Instrument";
+
+    }
+    else
+    {
+
+        text += " Instruments";
+
+    };
+}
+<hr>
+  <div>
+    <h3>
+        @text
+    </h3>
+  </div>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Serial Number
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Maintenance Date
+            </th>
+            <th>
+                Condition
+            </th>
+            <th>
+                Instrument Navigation
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Instrument)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SerialNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaintenanceDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Condition)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-controller="Instrument" asp-route-id="@item.Id">Edit Instrument</a> |
+                    <a asp-action="Delete" asp-controller="Instrument" asp-route-id="@item.Id">Delete Instrument </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

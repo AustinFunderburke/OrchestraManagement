@@ -1,0 +1,55 @@
+﻿@model IEnumerable<OrchestraManagement.Models.ViewModels.OrchestraListVM>
+
+@{
+    int x = 0;
+
+    ViewData["Title"] = "Orchestra Management Home";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WebsiteUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumMusician)
+            </th>
+
+            <th>
+                
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            x += 1;
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a href="@item.WebsiteUrl">@Html.DisplayFor(modelItem => item.WebsiteUrl)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumMusician)
+            </td>
+          
+            <td>
+                <a asp-action="Details" asp-controller="Orchestra" asp-route-id="@item.Id">Details</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<h3>
+    <b>Number of Orchestras is @x</b>
+</h3>
